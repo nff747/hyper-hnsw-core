@@ -1,9 +1,12 @@
-import { Vector, VectorId, HNSWConfig, DistanceFn, IndexStats } from '../types/index.js';
+import { Vector, VectorId, HNSWConfig, DistanceFn, SearchResult, QueryOptions } from '../types/index.js';
 import { getDistanceFunction } from '../distance/index.js';
 import { HNSWNode } from '../graph/node.js';
 import { GraphLayer } from '../graph/layer.js';
 import { ProbabilisticLevelGenerator } from '../graph/level-generator.js';
 import { FastVisitedSet } from '../graph/visited-set.js';
+import { insertVector } from './insert.js';
+import { searchLayerGreedy, searchLayerBeam } from './search.js';
+import { assertDimension } from '../utils/validation.js';
 
 export class HyperHNSW {
   public readonly dimensions: number;
@@ -40,5 +43,32 @@ export class HyperHNSW {
       this.layers.push(new GraphLayer(this.layers.length));
     }
     return this.layers[level];
+  }
+
+  public insert(id: VectorId, vector: Vector): void {
+    assertDimension(vector, this.dimensions);
+    insertVector(this, id, vector);
+  }
+
+  public search(query: Vector, k: number, options?: QueryOptions): SearchResult[] {
+    assertDimension(query, this.dimensions);
+    if (this.entryPointId === null || this.count === 0) {
+      return [];
+    }
+
+    let currentEp = this.entryPointId;
+    // Greedy descent from top level down to 1
+    for (let l = this.maxLevel; l > 0; l--) {
+      currentEp = searchLayerGreedy(this, query, currentEp, l);
+    }
+
+    const ef = Math.max(k, options?.efSearch ?? this.efSearch);
+    const candidates = searchLayerBeam(this, query, [currentEp], ef, 0, options?.filter);
+
+    return candidates.slice(0, k).map(c => ({
+      id: c.id,
+      distance: c.distance,
+      score: 1.0 / (1.0 + c.distance)
+    }));
   }
 }
