@@ -25,3 +25,33 @@ export interface QueryOptions {
   efSearch?: number;
   filter?: (id: VectorId) => boolean;
 }
+
+export interface SearchResult {
+  id: VectorId;
+  distance: number;
+  score: number;
+}
+
+export interface IndexStats {
+  count: number;
+  dimensions: number;
+  maxLevel: number;
+  memoryBytes: number;
+  entryPointId: VectorId | null;
+  nodesPerLevel: number[];
+  avgDegreePerLevel: number[];
+}
+
+export interface SerializationHeader {
+  magic: number;
+  version: number;
+  dimensions: number;
+  metric: number;
+  M: number;
+  M0: number;
+  efConstruction: number;
+  maxElements: number;
+  count: number;
+  entryPointId: number;
+  maxLevel: number;
+}
