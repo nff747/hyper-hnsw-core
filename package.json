@@ -1,0 +1,34 @@
+{
+  "name": "hyper-hnsw-core",
+  "version": "1.0.0",
+  "description": "⚡ Lock-Free Hierarchical Navigable Small World (HNSW) Vector Graph Indexing Engine with SIMD Unrolling & SQ8 Quantization",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "hyper-hnsw": "dist/bin/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "benchmark": "tsc && node dist/bin/cli.js bench"
+  },
+  "keywords": [
+    "hnsw",
+    "vector-search",
+    "embeddings",
+    "ann",
+    "simd",
+    "quantization",
+    "sq8",
+    "nearest-neighbor",
+    "vector-database"
+  ],
+  "author": "nff747",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}
