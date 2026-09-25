@@ -3,7 +3,7 @@ import { QuantizationMetadata, IScalarQuantizer } from './types.js';
 
 export class ScalarQuantizerSQ8 implements IScalarQuantizer {
   public metadata: QuantizationMetadata | null = null;
-  private readonly dimensions: number;
+  public readonly dimensions: number;
 
   constructor(dimensions: number) {
     this.dimensions = dimensions;
@@ -38,7 +38,13 @@ export class ScalarQuantizerSQ8 implements IScalarQuantizer {
     if (!this.metadata) {
       throw new Error('Quantizer must be trained before quantizing');
     }
-    return new Uint8Array(this.dimensions);
+    const { minValues, scales } = this.metadata;
+    const q = new Uint8Array(this.dimensions);
+    for (let d = 0; d < this.dimensions; d++) {
+      const scaled = (vector[d] - minValues[d]) * scales[d];
+      q[d] = Math.max(0, Math.min(255, Math.round(scaled)));
+    }
+    return q;
   }
 
   public dequantize(quantized: Uint8Array): Vector {
