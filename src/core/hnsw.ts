@@ -5,6 +5,7 @@ import { GraphLayer } from '../graph/layer.js';
 import { ProbabilisticLevelGenerator } from '../graph/level-generator.js';
 import { FastVisitedSet } from '../graph/visited-set.js';
 import { insertVector } from './insert.js';
+import { markDeleted } from './delete.js';
 import { searchLayerGreedy, searchLayerBeam } from './search.js';
 import { assertDimension } from '../utils/validation.js';
 
@@ -48,6 +49,10 @@ export class HyperHNSW {
   public insert(id: VectorId, vector: Vector): void {
     assertDimension(vector, this.dimensions);
     insertVector(this, id, vector);
+  }
+
+  public delete(id: VectorId): boolean {
+    return markDeleted(this, id);
   }
 
   public search(query: Vector, k: number, options?: QueryOptions): SearchResult[] {
