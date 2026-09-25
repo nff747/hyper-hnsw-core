@@ -48,6 +48,14 @@ export class ScalarQuantizerSQ8 implements IScalarQuantizer {
   }
 
   public dequantize(quantized: Uint8Array): Vector {
-    return new Float32Array(this.dimensions);
+    if (!this.metadata) {
+      throw new Error('Quantizer must be trained before dequantizing');
+    }
+    const { minValues, scales } = this.metadata;
+    const out = new Float32Array(this.dimensions);
+    for (let d = 0; d < this.dimensions; d++) {
+      out[d] = minValues[d] + (quantized[d] / scales[d]);
+    }
+    return out;
   }
 }
