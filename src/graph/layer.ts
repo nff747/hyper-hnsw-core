@@ -28,4 +28,16 @@ export class GraphLayer {
   public getAllNodeIds(): VectorId[] {
     return Array.from(this.nodes);
   }
+
+  public computeAverageDegree(allNodes: Map<VectorId, HNSWNode>): number {
+    if (this.nodes.size === 0) return 0;
+    let totalEdges = 0;
+    for (const id of this.nodes) {
+      const node = allNodes.get(id);
+      if (node && node.neighbors[this.level]) {
+        totalEdges += node.neighbors[this.level].length;
+      }
+    }
+    return totalEdges / this.nodes.size;
+  }
 }
