@@ -1,7 +1,7 @@
 {
   "name": "hyper-hnsw-core",
   "version": "1.0.0",
-  "description": "⚡ Lock-Free Hierarchical Navigable Small World (HNSW) Vector Graph Indexing Engine with SIMD Unrolling & SQ8 Quantization",
+  "description": "\u26a1 Lock-Free Hierarchical Navigable Small World (HNSW) Vector Graph Indexing Engine with SIMD Unrolling & SQ8 Quantization",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -30,5 +30,9 @@
     "@types/node": "^22.0.0",
     "typescript": "^5.6.2",
     "vitest": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nff747/hyper-hnsw-core.git"
   }
 }
