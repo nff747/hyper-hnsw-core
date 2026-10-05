@@ -2,7 +2,7 @@
 
 > **High-Performance Hierarchical Navigable Small World (HNSW) Vector Graph Indexing Engine** with SIMD Loop Unrolling, SQ8 Quantization, and Zero-Copy Binary Serialization.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-Apache_2.0-blue)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](https://github.com/nff747/hyper-hnsw-core)
 
