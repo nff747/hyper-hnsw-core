@@ -1,39 +1,29 @@
 {
   "name": "hyper-hnsw-core",
-  "version": "1.0.0",
-  "description": "\u26a1 Lock-Free Hierarchical Navigable Small World (HNSW) Vector Graph Indexing Engine with SIMD Unrolling & SQ8 Quantization",
+  "version": "1.1.0",
+  "description": "High-performance Hierarchical Navigable Small World (HNSW) vector index implementation for ultra-fast approximate nearest neighbor search.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": {
-    "hyper-hnsw": "dist/bin/cli.js"
-  },
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "benchmark": "tsc && node dist/bin/cli.js bench"
+    "bench": "node --expose-gc dist/bench/index.js"
   },
   "keywords": [
     "hnsw",
     "vector-search",
+    "approximate-nearest-neighbors",
     "embeddings",
     "ann",
-    "simd",
-    "quantization",
-    "sq8",
-    "nearest-neighbor",
-    "vector-database"
+    "similarity-search",
+    "product-quantization",
+    "scalar-quantization"
   ],
-  "author": "nff747",
+  "author": "nff747 <nff747@users.noreply.github.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.6.2",
-    "vitest": "^5.0.3",
-    "vite": "^8.3.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nff747/hyper-hnsw-core.git"
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0"
   }
 }
