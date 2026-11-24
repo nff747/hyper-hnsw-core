@@ -1,5 +1,7 @@
 # ⚡ HyperHNSW Core
 
+[![Lunar Paradox](https://img.shields.io/badge/Organization-Lunar_Paradox-0a0e1a?style=for-the-badge&logo=probot&logoColor=d7b886)](https://lunarparadox.com)
+
 > **High-Performance Hierarchical Navigable Small World (HNSW) Vector Graph Indexing Engine** with SIMD Loop Unrolling, SQ8 Quantization, and Zero-Copy Binary Serialization.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
@@ -80,3 +82,7 @@ npm run benchmark
 ## 📜 License
 
 Apache 2.0 © [nff747](https://github.com/nff747)
+
+---
+
+*A component of the [Lunar Paradox](https://lunarparadox.com) applied systems & graphics laboratory. Engineered by nff747.*
